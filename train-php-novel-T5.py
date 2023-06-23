@@ -66,8 +66,8 @@ class GeneratorDatasetForMultiSource(Dataset):
         self.data = dataframe
         self.source_len = source_len
         self.summ_len = summ_len
-        self.text_data_1 = self.data.buggy
-        self.text_data_2 = self.data.additional_info
+        self.text_data_1 = self.data.additional_info
+        self.text_data_2 = self.data.buggy
         self.labels = self.data.patch
         self.bugid = self.data.bugid
         self.bug = self.data.bug
@@ -322,7 +322,7 @@ def syntactic(epoch,syn_train_data_path):
     torch.cuda.empty_cache()
     
     # Process data
-    df = pd.read_csv(syn_train_data_path,encoding='latin-1',delimiter='\t', header=0, error_bad_lines=False, nrows=100).dropna()
+    df = pd.read_csv(syn_train_data_path,encoding='latin-1',delimiter='\t', header=0, error_bad_lines=False).dropna()
     print(df.head())
     df = df[['bugid','buggy','additional_info','patch']]
     print(df.head())
